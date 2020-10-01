@@ -1,2 +1,4 @@
 Webradio  
-systemd files for icecast2/mpd and bind9 who working at reboot
+systemd files for icecast2/mpd and bind9 who working at reboot  
+Maybe you need to this line in rc.local... 
+mpc status | grep -e "^ERROR:" >/dev/null && (systemctl restart bind9 mpd icecast2;mpc --host=Musc4ri413@transylvanie.lan play >/dev/null; printf "bind9/mpd/icecast2 started manually\n" >> /tmp/services)
