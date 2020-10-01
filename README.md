@@ -2,7 +2,7 @@ Webradio
 systemd files for icecast2/mpd and bind9 who working at reboot  
 Maybe you need to this line in rc.local...  
 mpc status | grep -e "^ERROR:" >/dev/null && \  
-	(  	nslookup host >> /tmp/services;  
+	(  	nslookup host -timeout=1 127.0.0.1 >> /tmp/services;  
 		systemctl status bind9 >> /tmp/services;  
 		systemctl status mpd >> /tmp/services;  
 		systemctl status icecast2 >> /tmp/services;  
