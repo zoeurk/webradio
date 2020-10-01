@@ -13,3 +13,4 @@ Sometime services like bind doesn't start corectly
 In a first time I would like to start my webradio whitout rc.local...  
 sorry  
 But this doesn't use rc.local at every time :)
+Before using rc.local try without rc.local ;)
