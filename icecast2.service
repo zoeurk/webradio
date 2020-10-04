@@ -2,7 +2,7 @@
 Description=icecast streaming daemon
 #After=network.target sound.target
 After=bind9.service
-Before=mpd.service mpd.socket
+Before=mpd.service
 
 [Service]
 #Type=notify
