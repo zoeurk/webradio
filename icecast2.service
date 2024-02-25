@@ -1,8 +1,8 @@
 [Unit]
 Description=icecast streaming daemon
 #After=network.target sound.target
-After=bind9.service
-Before=mpd.service
+After=bind9.target
+Before=mpd.target
 
 [Service]
 #Type=notify
