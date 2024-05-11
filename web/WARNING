@@ -1,0 +1,13 @@
+### In this directory:
+DON'T FORGOT TO RESTRICT ACCESS TO THE DIRECTORY 'private' (it contains password, scripts...).
+You should modify Manifest.json and index.php (eg: title, author, ...).
+
+You can use, share (/redistriber), modify that thing without any limits.
+Cette chose est libre d'usage, modification, distribution(/redistribution) sans aucunes limites
+
+You probably must to use the source file for create the main library.
+
+	cd /DOCUMENT/ROOT/private
+	. ./src/library.src
+
+ABSOLUTE NO WARENTY

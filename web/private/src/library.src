@@ -1,0 +1,1 @@
+mpc -f "\"artist\": \"%artist%\", \"album\": \"%date% - %album%\", \"track\": \"%track%\" - \"%title%\"" playlist | sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | sed -nf sed/mpc2json.sed > jsons/mpd.json
