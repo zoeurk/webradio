@@ -151,8 +151,10 @@ var song = {
 				}
 				currentplay.myjson = JSON.parse(this.responseText);
 				//if(count != 0){
-					req.reqDuration.classList.toggle("text-success");
-					req.reqDuration.classList.toggle("text-warning");
+					if(req.reqDuration.className.includes("text-warning") == true){
+						req.reqDuration.classList.toggle("text-success");
+						req.reqDuration.classList.toggle("text-warning");
+					}
 					let t = Date.now() - reqtime;
 					req.reqDuration.innerHTML = "Duration: " + t + " ms";
 					req.reqCount.innerHTML = "Req Count: " + count;
@@ -259,10 +261,12 @@ var song = {
 				clearInterval(req.interval);
 				currentplay.myjson = JSON.parse(this.responseText);
 				//if(count != 0){
-					req.reqDuration.classList.toggle("text-success");
-					req.reqDuration.classList.toggle("text-warning");
-					req.reqResponse.classList.toggle("text-success");
-					req.reqResponse.classList.toggle("text-warning");
+					if(req.reqDuration.className.includes("text-warning") == true){
+						req.reqDuration.classList.toggle("text-success");
+						req.reqDuration.classList.toggle("text-warning");
+						req.reqResponse.classList.toggle("text-success");
+						req.reqResponse.classList.toggle("text-warning");
+					}
 					var n = Date.now();
 					var d = currentplay.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
@@ -408,10 +412,12 @@ var song = {
 				console.log(this.responseText);
 				current.myjson = JSON.parse(this.responseText);
 				//if(count != 0){
-					req.reqDuration.classList.toggle("text-success");
-					req.reqDuration.classList.toggle("text-warning");
-					req.reqResponse.classList.toggle("text-success");
-					req.reqResponse.classList.toggle("text-warning");
+					if(req.reqDuration.className.includes("text-warning") == true){
+						req.reqDuration.classList.toggle("text-success");
+						req.reqDuration.classList.toggle("text-warning");
+						req.reqResponse.classList.toggle("text-success");
+						req.reqResponse.classList.toggle("text-warning");
+					}
 					let n = Date.now();
 					let t = n - reqtime;
 					let d = current.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
@@ -520,10 +526,12 @@ var song = {
 				}
 				current.myjson = JSON.parse(this.responseText);
 				//if(count != 0){
-					req.reqDuration.classList.toggle("text-success");
-					req.reqDuration.classList.toggle("text-warning");
-					req.reqResponse.classList.toggle("text-success");
-					req.reqResponse.classList.toggle("text-warning");
+					if(req.reqDuration.className.includes("text-warning") == true){	
+						req.reqDuration.classList.toggle("text-success");
+						req.reqDuration.classList.toggle("text-warning");
+						req.reqResponse.classList.toggle("text-success");
+						req.reqResponse.classList.toggle("text-warning");
+					}
 					let n = Date.now();
 					let t = n - reqtime;
 					let d = current.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
@@ -670,10 +678,12 @@ var chanson = {
 				}
 				song.myjson = JSON.parse(this.responseText);
 				//if(count != 0){
-					req.reqDuration.classList.toggle("text-success");
-					req.reqDuration.classList.toggle("text-warning");
-					req.reqResponse.classList.toggle("text-success");
-					req.reqResponse.classList.toggle("text-warning");
+					if(req.reqDuration.className.includes("text-warning") == true){
+						req.reqDuration.classList.toggle("text-success");
+						req.reqDuration.classList.toggle("text-warning");
+						req.reqResponse.classList.toggle("text-success");
+						req.reqResponse.classList.toggle("text-warning");
+					}
 					//let t = Date.now() - reqtime;
 					let n = Date.now();
 					let t = n - reqtime;
