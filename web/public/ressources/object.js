@@ -27,37 +27,6 @@ function DataReceived(){
 		hide = false;
 	}, 1250)
 }
-/*var stat = {
-	count: 0,
-	reqDuration: document.getElementById('reqDuration'),
-	reqResponse: document.getElementById('reqResponse'),
-	reqCount: document.getElementById('reqCount'),
-	reqtime: 0,
-	toggle: function(){
-		this.reqDuration.classList.toggle("text-success");
-		this.reqDuration.classList.toggle("text-warning");
-		this.reqResponse.classList.toggle("text-success");
-		this.reqResponse.classList.toggle("text-warning");
-	},
-	result: function(date){
-		if(this.count != 0){
-			this.toggle();
-			var n = Date.now();
-			var d = date.replace(/^[A-Za-z]{3}, /, '');
-			d = Date.parse(d);
-			let t = n - reqtime;
-			let _d = (n - d)/1000;
-			if(_d < 0){
-				_d = (d - n)/1000;
-			}
-			req.reqDuration.innerHTML = "Request: " + t + " ms";
-			req.reqResponse.innerHTML = "Response: " + _d.toFixed(2) + " s";
-			req.reqCount.innerHTML = "Req Count: " + count;
-			let t = Date.now() - reqtime;
-			this.count = 0;
-		}
-	}
-}*/
 var ticket = {
 	protocole: proto,
 	hostname: host,
@@ -298,7 +267,12 @@ var song = {
 					var d = currentplay.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
 					let t = n - reqtime;
-					let _d = (n - d)/1000;
+					//let _d = (n - d)/1000;
+					if(n < d){
+						var _d = (d - n)/1000;
+					}else{
+						var _d = (n - d)/1000;
+					}
 					/*if(_d < 0){
 						_d = (d - n)/1000;
 					}*/
@@ -337,8 +311,8 @@ var song = {
 				}
 				if(currentplay.TIMEOUT != false)
 					clearTimeout(currentplay.TIMEOUT);
-				if(n >= d){
-					currentplay.TIMEOUT = setTimeout(() => { currentplay.currentplaying(false); }, currentplay.time - (n - d));
+				if(_d < currentplay.time){
+					currentplay.TIMEOUT = setTimeout(() => { currentplay.currentplaying(false); }, currentplay.time - _d);
 				}else{
 					/*if(d - n >= currentplay.time){
 						currentplay.TIMEOUT = setTimeout(() => { currentplay.currentplaying(false); }, currentplay.time - (d - n));
@@ -442,10 +416,11 @@ var song = {
 					let t = n - reqtime;
 					let d = current.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
-					let _d = (n - d)/1000;
-					/*if(_d < 0){
-						_d = (d - n)/1000;
-					}*/
+					if(n < d){
+						var _d = (d - n)/1000;
+					}else{
+						var _d = (n - d)/1000;
+					}
 					req.reqDuration.innerHTML = "Request: " + t + " ms";
 					req.reqResponse.innerHTML = "Response: " + _d.toFixed(2) + " s";
 					req.reqCount.innerHTML = "Req Count: " + count;
@@ -460,8 +435,8 @@ var song = {
 				ticket.TIMEOUT = setTimeout(() => { ticket.timeout_tkt(); }, ticket.tkt_time);
 				if(current.TIMEOUT != false)
 					clearTimeout(current.TIMEOUT);
-				if(n >= d){
-					current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (n - d));
+				if(_d > current.time){
+					current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - _d);
 				}else{
 					/*if(d - n >= current.time){
 						current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (d - n));
@@ -486,7 +461,7 @@ var song = {
 			this.reqCount.innerHTML = "Req Count: " + count;
 			request.open("POST", this.requrl);
 			request.send(this.Data);
-			if(count == 24){
+			if(count == maxc){
 				req.reqDuration.innerHTML = "Request: NaN";
 				req.reqResponse.innerHTML = "Response: NaN";
 				req.reqCount.innerHTML = "Req Count: inf";
@@ -553,7 +528,12 @@ var song = {
 					let t = n - reqtime;
 					let d = current.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
-					let _d = (n - d)/1000;
+					if(n < d){
+						var _d = (d - n)/1000;
+					}else{
+						var _d = (n - d)/1000;
+					}
+					//let _d = (n - d)/1000;
 					/*if(_d < 0){
 						_d = (d - n)/1000;
 					}*/
@@ -573,8 +553,8 @@ var song = {
 				ticket.TIMEOUT = setTimeout(() => { ticket.timeout_tkt(); }, ticket.tkt_time);
 				if(current.TIMEOUT != false)
 					clearTimeout(current.TIMEOUT);
-				if(n >= d){
-					current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (n - d));
+				if(current.time > _d){
+					current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - _d);
 				}else{
 					/*if(d - n >= current.time){
 						current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (d - n));
@@ -699,7 +679,12 @@ var chanson = {
 					let t = n - reqtime;
 					let d = song.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
-					let _d = (n - d)/1000;
+					if(n < d){
+						var _d = (d - n)/1000;
+					}else{
+						var _d = (n - d)/1000;
+					}
+					//let _d = (n - d)/1000;
 					/*if(_d < 0){
 						_d = (d - n)/1000;
 					}*/
@@ -720,8 +705,8 @@ var chanson = {
 					clearTimeout(song.TIMEOUT);
 				/*if(current.TIMEOUT != false)
 					clearTimeout(current.TIMEOUT);*/
-				if(n >= d){
-					song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (n - d));
+				if(time > _d){
+					song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - _d);
 				}else{
 					/*if(d - n >= time){
 						song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (d - n));
@@ -1518,7 +1503,12 @@ var chanson = {
 					let t = n - reqtime;
 					let d = song.myjson["Date"].replace(/^[A-Za-z]{3}, /, '');
 					d = Date.parse(d);
-					let _d = (n - d)/1000;
+					if(n < d){
+						var _d = (d - n)/1000;
+					}else{
+						var _d = (n - d)/1000;
+					}
+					//let _d = (n - d)/1000;
 					/*if(_d < 0){
 						_d = (d - n)/1000;
 					}*/
@@ -1565,8 +1555,8 @@ var chanson = {
 				if(song.TIMEOUT != false)
 					clearTimeout(song.TIMEOUT);
 				//song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time);
-				if(n >= d){
-					song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (n - d));
+				if(time > _d){
+					song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - _d);
 				}else{
 					/*if(d - n >= time){
 						song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (d - n));
