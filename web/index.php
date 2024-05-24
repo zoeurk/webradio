@@ -338,7 +338,7 @@ require_once("private/library/hostname.php");
 		</div>
 		<div class="d-flex flex-column bd-highlight mb-1">
 			<audio id="track">
-				<source prelaod="none"
+				<source preload="none"
 					id="audio_src"
 					src="<?php echo $proto . '://' . $_SERVER['HOSTNAME'] . ':' . $port . '/stream'; ?>"
 					type="audio/ogg"
