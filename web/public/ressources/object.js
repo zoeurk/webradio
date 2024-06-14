@@ -321,6 +321,7 @@ var song = {
 					/*if(d - n >= currentplay.time){
 						currentplay.TIMEOUT = setTimeout(() => { currentplay.currentplaying(false); }, currentplay.time - (d - n));
 					}else{*/
+						currentplay.init = 0;
 						currentplay.currentplaying(false);
 					//}
 				}
@@ -447,6 +448,7 @@ var song = {
 					/*if(d - n >= current.time){
 						current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (d - n));
 					}else{*/
+						current.init = 0;
 						current.currentplaying(false);
 					//}
 				}
@@ -567,6 +569,7 @@ var song = {
 					/*if(d - n >= current.time){
 						current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - (d - n));
 					}else{*/
+						current.init = 0;
 						current.currentplaying(false);
 					//}
 				}
@@ -721,6 +724,7 @@ var chanson = {
 					/*if(d - n >= time){
 						song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (d - n));
 					}else{*/
+						song.init = 0;
 						song.currentplaying(false);
 					//}
 				}
@@ -1571,6 +1575,7 @@ var chanson = {
 					/*if(d - n >= time){
 						song.TIMEOUT = setTimeout(() => { song.currentplaying(false); }, time - (d - n));
 					}else{*/
+						song.init = 0;
 						song.currentplaying(false);
 					//}
 				}
