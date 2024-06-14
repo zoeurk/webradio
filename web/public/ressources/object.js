@@ -441,7 +441,7 @@ var song = {
 				ticket.TIMEOUT = setTimeout(() => { ticket.timeout_tkt(); }, ticket.tkt_time);
 				if(current.TIMEOUT != false)
 					clearTimeout(current.TIMEOUT);
-				if(_d > current.time){
+				if(_d < current.time){
 					current.TIMEOUT = setTimeout(() => { current.currentplaying(false); }, current.time - _d);
 				}else{
 					/*if(d - n >= current.time){
