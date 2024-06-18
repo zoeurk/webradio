@@ -166,6 +166,11 @@ function navitem(item){
 					document.getElementById('prev').classList.toggle('d-none');
 					document.getElementById('next').classList.toggle('d-none');
 					document.getElementById('menu').classList.toggle('d-none');
+					if(document.getElementById('search-menu').className == "page-link active"){
+						document.getElementById('search-menu').classList.toggle("active");
+						document.getElementById('search-menu').classList.toggle("d-none");
+						document.getElementById('playlist-menu').classList.toggle("active");
+					}
 					var Data = new FormData();
 					var v_id = document.getElementById('id').getAttribute('value');
 					var v_ticket = document.getElementById('ticket').getAttribute('value');
