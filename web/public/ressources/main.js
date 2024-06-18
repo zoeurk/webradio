@@ -46,7 +46,12 @@ function menulst(itemclk, item){
 	}else{
 		if(doc.className != "page-link active"){
 			doc.classList.toggle("active");
-			document.getElementById(item).classList.toggle("active");
+			if(document.getElementById('search-menu').className == "page-link active"){
+				document.getElementById('search-menu').classList.toggle("active");
+				document.getElementById('search-menu').classList.toggle("d-none");
+			}else{
+				document.getElementById(item).classList.toggle("active");
+			}
 			switch(itemclk){
 				case 'playlist-menu':
 					chanson.work = chanson.playlist;
