@@ -120,7 +120,7 @@ require_once("private/library/hostname.php");
 					</div>
 					<form method="post" id='form_recherche' action="">
 						<div class="form-group row">
-							<label for="_titre" class="form-label col-sm-2 col-form-label"
+							<label for="title_search" class="form-label col-sm-2 col-form-label"
 								style="padding-left:5%;"
 							>titre:</label>
 							<div class="col-sm-10">
