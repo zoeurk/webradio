@@ -9,7 +9,7 @@ require_once("private/library/hostname.php");
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
 			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" /-->
-		<link rel="manifest" href="./public/ressources/manifest.json">
+		<link rel="manifest" href="./manifest.json">
 		<link rel="stylesheet" href="./public/ressources/style.css" />
 		<link rel="shortcut icon" href="./public/images/mush.ico" sizes="32x32"/>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
