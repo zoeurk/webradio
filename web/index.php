@@ -1,374 +1,384 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <!--
-    Modified from the Debian original for Ubuntu
-    Last updated: 2016-11-16
-    See: https://launchpad.net/bugs/1288690
-  -->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Apache2 Ubuntu Default Page: It works</title>
-    <style type="text/css" media="screen">
-  * {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-  }
-
-  body, html {
-    padding: 3px 3px 3px 3px;
-
-    background-color: #D8DBE2;
-
-    font-family: Verdana, sans-serif;
-    font-size: 11pt;
-    text-align: center;
-  }
-
-  div.main_page {
-    position: relative;
-    display: table;
-
-    width: 800px;
-
-    margin-bottom: 3px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px 0px 0px 0px;
-
-    border-width: 2px;
-    border-color: #212738;
-    border-style: solid;
-
-    background-color: #FFFFFF;
-
-    text-align: center;
-  }
-
-  div.page_header {
-    height: 99px;
-    width: 100%;
-
-    background-color: #F5F6F7;
-  }
-
-  div.page_header span {
-    margin: 15px 0px 0px 50px;
-
-    font-size: 180%;
-    font-weight: bold;
-  }
-
-  div.page_header img {
-    margin: 3px 0px 0px 40px;
-
-    border: 0px 0px 0px;
-  }
-
-  div.table_of_contents {
-    clear: left;
-
-    min-width: 200px;
-
-    margin: 3px 3px 3px 3px;
-
-    background-color: #FFFFFF;
-
-    text-align: left;
-  }
-
-  div.table_of_contents_item {
-    clear: left;
-
-    width: 100%;
-
-    margin: 4px 0px 0px 0px;
-
-    background-color: #FFFFFF;
-
-    color: #000000;
-    text-align: left;
-  }
-
-  div.table_of_contents_item a {
-    margin: 6px 0px 0px 6px;
-  }
-
-  div.content_section {
-    margin: 3px 3px 3px 3px;
-
-    background-color: #FFFFFF;
-
-    text-align: left;
-  }
-
-  div.content_section_text {
-    padding: 4px 8px 4px 8px;
-
-    color: #000000;
-    font-size: 100%;
-  }
-
-  div.content_section_text pre {
-    margin: 8px 0px 8px 0px;
-    padding: 8px 8px 8px 8px;
-
-    border-width: 1px;
-    border-style: dotted;
-    border-color: #000000;
-
-    background-color: #F5F6F7;
-
-    font-style: italic;
-  }
-
-  div.content_section_text p {
-    margin-bottom: 6px;
-  }
-
-  div.content_section_text ul, div.content_section_text li {
-    padding: 4px 8px 4px 16px;
-  }
-
-  div.section_header {
-    padding: 3px 6px 3px 6px;
-
-    background-color: #8E9CB2;
-
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 112%;
-    text-align: center;
-  }
-
-  div.section_header_red {
-    background-color: #CD214F;
-  }
-
-  div.section_header_grey {
-    background-color: #9F9386;
-  }
-
-  .floating_element {
-    position: relative;
-    float: left;
-  }
-
-  div.table_of_contents_item a,
-  div.content_section_text a {
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  div.table_of_contents_item a:link,
-  div.table_of_contents_item a:visited,
-  div.table_of_contents_item a:active {
-    color: #000000;
-  }
-
-  div.table_of_contents_item a:hover {
-    background-color: #000000;
-
-    color: #FFFFFF;
-  }
-
-  div.content_section_text a:link,
-  div.content_section_text a:visited,
-   div.content_section_text a:active {
-    background-color: #DCDFE6;
-
-    color: #000000;
-  }
-
-  div.content_section_text a:hover {
-    background-color: #000000;
-
-    color: #DCDFE6;
-  }
-
-  div.validator {
-  }
-    </style>
-  </head>
-  <body>
-    <div class="main_page">
-      <div class="page_header floating_element">
-        <img src="/icons/ubuntu-logo.png" alt="Ubuntu Logo" class="floating_element"/>
-        <span class="floating_element">
-          Apache2 Ubuntu Default Page
-        </span>
-      </div>
-<!--      <div class="table_of_contents floating_element">
-        <div class="section_header section_header_grey">
-          TABLE OF CONTENTS
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#about">About</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#changes">Changes</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#scope">Scope</a>
-        </div>
-        <div class="table_of_contents_item floating_element">
-          <a href="#files">Config files</a>
-        </div>
-      </div>
--->
-      <div class="content_section floating_element">
-
-
-        <div class="section_header section_header_red">
-          <div id="about"></div>
-          It works!
-        </div>
-        <div class="content_section_text">
-          <p>
-                This is the default welcome page used to test the correct 
-                operation of the Apache2 server after installation on Ubuntu systems.
-                It is based on the equivalent page on Debian, from which the Ubuntu Apache
-                packaging is derived.
-                If you can read this page, it means that the Apache HTTP server installed at
-                this site is working properly. You should <b>replace this file</b> (located at
-                <tt>/var/www/html/index.html</tt>) before continuing to operate your HTTP server.
-          </p>
-
-
-          <p>
-                If you are a normal user of this web site and don't know what this page is
-                about, this probably means that the site is currently unavailable due to
-                maintenance.
-                If the problem persists, please contact the site's administrator.
-          </p>
-
-        </div>
-        <div class="section_header">
-          <div id="changes"></div>
-                Configuration Overview
-        </div>
-        <div class="content_section_text">
-          <p>
-                Ubuntu's Apache2 default configuration is different from the
-                upstream default configuration, and split into several files optimized for
-                interaction with Ubuntu tools. The configuration system is
-                <b>fully documented in
-                /usr/share/doc/apache2/README.Debian.gz</b>. Refer to this for the full
-                documentation. Documentation for the web server itself can be
-                found by accessing the <a href="/manual">manual</a> if the <tt>apache2-doc</tt>
-                package was installed on this server.
-
-          </p>
-          <p>
-                The configuration layout for an Apache2 web server installation on Ubuntu systems is as follows:
-          </p>
-          <pre>
-/etc/apache2/
-|-- apache2.conf
-|       `--  ports.conf
-|-- mods-enabled
-|       |-- *.load
-|       `-- *.conf
-|-- conf-enabled
-|       `-- *.conf
-|-- sites-enabled
-|       `-- *.conf
-          </pre>
-          <ul>
-                        <li>
-                           <tt>apache2.conf</tt> is the main configuration
-                           file. It puts the pieces together by including all remaining configuration
-                           files when starting up the web server.
-                        </li>
-
-                        <li>
-                           <tt>ports.conf</tt> is always included from the
-                           main configuration file. It is used to determine the listening ports for
-                           incoming connections, and this file can be customized anytime.
-                        </li>
-
-                        <li>
-                           Configuration files in the <tt>mods-enabled/</tt>,
-                           <tt>conf-enabled/</tt> and <tt>sites-enabled/</tt> directories contain
-                           particular configuration snippets which manage modules, global configuration
-                           fragments, or virtual host configurations, respectively.
-                        </li>
-
-                        <li>
-                           They are activated by symlinking available
-                           configuration files from their respective
-                           *-available/ counterparts. These should be managed
-                           by using our helpers
-                           <tt>
-                                a2enmod,
-                                a2dismod,
-                           </tt>
-                           <tt>
-                                a2ensite,
-                                a2dissite,
-                            </tt>
-                                and
-                           <tt>
-                                a2enconf,
-                                a2disconf
-                           </tt>. See their respective man pages for detailed information.
-                        </li>
-
-                        <li>
-                           The binary is called apache2. Due to the use of
-                           environment variables, in the default configuration, apache2 needs to be
-                           started/stopped with <tt>/etc/init.d/apache2</tt> or <tt>apache2ctl</tt>.
-                           <b>Calling <tt>/usr/bin/apache2</tt> directly will not work</b> with the
-                           default configuration.
-                        </li>
-          </ul>
-        </div>
-
-        <div class="section_header">
-            <div id="docroot"></div>
-                Document Roots
-        </div>
-
-        <div class="content_section_text">
-            <p>
-                By default, Ubuntu does not allow access through the web browser to
-                <em>any</em> file apart of those located in <tt>/var/www</tt>,
-                <a href="http://httpd.apache.org/docs/2.4/mod/mod_userdir.html" rel="nofollow">public_html</a>
-                directories (when enabled) and <tt>/usr/share</tt> (for web
-                applications). If your site is using a web document root
-                located elsewhere (such as in <tt>/srv</tt>) you may need to whitelist your
-                document root directory in <tt>/etc/apache2/apache2.conf</tt>.
-            </p>
-            <p>
-                The default Ubuntu document root is <tt>/var/www/html</tt>. You
-                can make your own virtual hosts under /var/www. This is different
-                to previous releases which provides better security out of the box.
-            </p>
-        </div>
-
-        <div class="section_header">
-          <div id="bugs"></div>
-                Reporting Problems
-        </div>
-        <div class="content_section_text">
-          <p>
-                Please use the <tt>ubuntu-bug</tt> tool to report bugs in the
-                Apache2 package with Ubuntu. However, check <a
-                href="https://bugs.launchpad.net/ubuntu/+source/apache2"
-                rel="nofollow">existing bug reports</a> before reporting a new bug.
-          </p>
-          <p>
-                Please report bugs specific to modules (such as PHP and others)
-                to respective packages, not to the web server itself.
-          </p>
-        </div>
-
-
-
-
-      </div>
-    </div>
-    <div class="validator">
-    </div>
-  </body>
+<!doctype html>
+<?php
+require_once("private/library/hostname.php");
+	$proto = 'http';
+	$port = '8000';
+?>
+<html lang="fr">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+		<!--link href="./public/ressources/bootstrap.min.css" rel="stylesheet"/-->
+		<link rel="manifest" href="./manifest.json">
+		<link rel="stylesheet" href="./public/ressources/style.css" />
+		<link rel="shortcut icon" href="./public/images/mush.ico" sizes="32x32"/>
+		<meta http-equiv="Cache-Control" content="max-age=120,no-cache, no-store" />
+		<meta http-equiv="Age" content="90" />
+		<meta http-equiv="Expires" content="Thu, 1 January 1970 00:00:00 GMT" />
+		<title>Zoeurk JukeBox</title>
+	</head>
+	<body>
+		<form id="config" method='' action='' style="display:none;">
+			<input id='host' name='config_host' value="<?php echo $_SERVER['HOSTNAME']; ?>">
+			<input id='proto' name='config_proto'
+				value="<?php echo $proto ?>">
+			<input id='port' name='config_port' value="<?php echo $port; ?>">
+			<input name="config_id" class='id' id="id" >
+			<input name="config_ticket" class='ticket' id="ticket">
+		</form>
+		<div class="modal fade" id="warning">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content panel-warning">
+					<div class="modal-header bg-warning">
+						<b><h5 class="modal-title text-dark">Login Invalid</h5></b>
+						<button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+						</button>
+					</div>
+					<div class="modal-footer bg-warning">
+						<button type="button" data-bs-dismiss="modal" class="btn btn-warning text-dark">Ok</button>
+						<button type="button" id="datanotsend" data-bs-dismiss="modal"
+							class="btn btn-warning text-dark"
+						>fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="DataSend">
+			<div class="modal-dialog">
+				<div class="modal-content panel-success">
+					<div class="modal-header bg-success">
+						<b><h5 class="modal-title">Data Send ;-)</h5></b>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
+					</div>
+					<div class="modal-footer bg-success">
+						<button type="button" onclick="datasend();" class="btn btn-success">Ok</button>
+						<button type="button" onclick="datasend()";
+							class="btn btn-success"
+						>fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="DataRecv">
+			<div class="modal-dialog">
+				<div class="modal-content panel-success">
+					<div class="modal-header bg-success">
+						<b><h5 class="modal-title">Data Received ;-)</h5></b>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
+					</div>
+					<div class="modal-footer bg-success">
+						<button type="button"  data-bs-dismiss="modal" class="btn btn-success">Ok</button>
+						<button type="button"  data-bs-dismiss="modal";
+							class="btn btn-success"
+						>fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="controles">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Login:</h5>
+						<b><span id="response_login" class="text-danger" style="display:none;">response</span></b>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+							onclick="navitem(0)">
+						</button>
+					</div>
+					<form method="post" id='post_login' action="public/php/login.php" autocomplete='on'>
+						<div class="mb-3">
+							<label for="username" class="form-label" style="padding-left:5%;">Utilisateur:</label>
+							<input type="text" class="form-control" name="username" id="username"
+								autocomplete='username' required/>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label" style="padding-left:5%;">Mot de passe:</label>
+							<input type="password" class="form-control" name="password" id="password"
+								autocomplete='current-password' required/>
+						</div>
+						<div class="modal-footer">
+							<button type="submit"
+								class="btn btn-primary"
+							>Soumettre</button>
+							<button type="button"
+								data-bs-dismiss="modal"
+								class="btn btn-primary"
+								id='fermer' onclick="navitem(0)"
+							>Fermer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal_recherche">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Recherche:</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form method="post" id='form_recherche' action="">
+						<div class="form-group row">
+							<label for="title_search" class="form-label col-sm-2 col-form-label"
+								style="padding-left:5%;"
+							>titre:</label>
+							<div class="col-sm-10">
+								<input type="titre" class="form-control" name="titre" id="title_search"/>
+ <input class="form-check-input" type="checkbox" value="" id="Server">
+  <label class="form-check-label" for="Server">
+    Server Request
+ </label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" 
+								data-bs-dismiss="modal"
+								class="btn btn-primary"
+								onclick="recherche()"
+								id="soumettre"
+							>Soumettre</button>
+							<button type="button" data-bs-dismiss="modal" class="btn btn-primary">Fermer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-around" id="title">
+			<b id="zoeurk"><u>ZoeurK JukeBox</u></b>
+		</div>
+		<nav class="navbar navbar-expand-sm navbar-light" style="background-color:lightblue;border-color:lightblue;">
+			<div class="container-fluid">
+				<span class="navbar-brand"><b>Radio</b></span>
+				<button class="navbar-toggler"
+					style="color:lightblue;"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarsRadio"
+					aria-controls="navbarsRadio"
+					aria-expanded="false">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarsRadio">
+					<ul class="navbar-nav me-auto mb-2 mb-sm-0">
+						<li class="nav-item">
+							<a class="nav-link link-primary active"
+								id="logoutaccueil"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarsRadio"
+								onclick="navitem(0)"
+								href="javascript:void(0);"
+							>Accueil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link link-dark"
+								id="controles-item"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarsRadio"
+								onclick="navitem(1)"
+								href="javascript:void(0);"
+							>Controles</a>
+						</li>
+						<li class="nav-item">
+							<!--dropdown-toggle-->
+							<div class="dropdown show">
+								<a class="nav-link link-dark d-none"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
+									data-bs-auto-close="true"
+									id="options"
+									href="javascript:void(0);"
+								>Options</a>
+									<ul class="dropdown-menu" style='background-color:lightblue;'>
+										<li><a class="dopdown-item" 
+											href='javascript:void(0);'
+										>
+											<div class="d-flex flex-row bd-highlight mb-3">
+												<div class="form-check form-check-inline">
+													<input class="form-check-input"
+														data-bs-toggle="collapse"
+														data-bs-target="#navbarsRadio"
+														type="checkbox"
+														name="ConfigRadio"
+														onclick="radio('loop', 1)"
+														id="loop"
+														value="loop"
+													>
+													<label class="form-check-label"
+														for="loop"
+													>loop</label>
+												</div>
+												<div class="form-check form-check-inline">
+													<input class="form-check-input"
+														data-bs-toggle="collapse"
+														data-bs-target="#navbarsRadio"
+														type="checkbox"
+														name="ConfigRadio"
+														onclick="radio('shuffle',2)"
+														id="shuffle"
+														value="shuffle"
+													>
+													<label class="form-check-label"
+														for="shuffle"
+													>shuffle</label>
+												</div>
+											</div>
+							    			</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link link-dark d-none"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarsRadio"
+								id="recherche"
+								onclick="mySearch.show()"
+								href="javascript:void(0);"
+							>Recherche</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="d-flex align-items-end flex-column mb-1 me-4" id="inforeq">
+			<div class="text-success" id='reqDuration'>Duration:</div>
+			<div class="text-success" id='reqResponse'>Response:</div>
+			<div class="text-success" id='reqCount'>count:</div>
+		</div>
+		<div class="d-flex flex-row" id="titre_actuel">
+			<div class="p-2"><b><u>titre actuel:</u></b></div>
+		</div>
+		<div class="justify-content-center">
+			<a class="d-flex justify-content-center autheur_info" href="javascript:void(0);"
+				id='les_infos_click' onclick="les_infos()">
+			 <ul class="d-flex justify-content-center">
+			  <li class="d-flex justify-content-center ms-0"><b>Artiste:</b></li>
+			  <li>
+				<div class="d-flex justify-content-center">
+					<div id="autheur" class="brown"></div>
+					<div class="triangle-down"></div>
+				</div>
+			  </li>
+			 </ul>
+			</a>
+			<div class="more_info" id="album_info" style="display:none;">
+			 <ul class="d-flex justify-content-center">
+			  <li class="d-flex justify-content-center m-0"><b>Album:</b></li>
+			  <li id="album" class="d-flex justify-content-center brown"></li>
+			 </ul>
+			</div>
+			<div class="more_info" id="titre_info" style="display:none;">
+			 <ul class="d-flex justify-content-center">
+			  <li class="d-flex justify-content-center m-0"><b>titre:</b></li>
+			  <li id="titre" class="d-flex justify-content-center brown"></li>
+			 </ul>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center">
+			<div class="d-flex flex-row bd-highlight mb-3">
+				<div class="d-flex flex-column bd-highlight mb-2 p-2 d-none" id="next">
+					<a class="text-decoration-none bd-highlight"
+						style="color:black;display:block;"
+						onclick="song.prev()"
+						href="javascript:void(0);">
+						<img src='public/images/prev-24x24.png'>
+						<figcaption>prev</figcaption>
+					</a>
+				</div>
+				<div class="d-flex flex-column bd-highlight mb-2 p-2">
+					<a class="text-decoration-none bd-highlight" id="loading"
+						style="color:black;display:none;"
+						onclick="playpause('stalled', null)"
+						href="javascript:void(0);">
+						<img id='loading-' style="color:black;display:none;" src='public/images/loading-24x24.png'>
+						<figcaption>loading</figcaption>
+					</a>
+					<a class="text-decoration-none bd-highlight" id="play"
+						style="color:black;display:block;"
+						onclick="playpause('play', false)"
+						href="javascript:void(0);">
+						<img id='play-' style="color:black;display:block;" src='public/images/pause-24x24.png'>
+						<figcaption>pause</figcaption>
+					</a>
+					<a class="text-decoration-none bd-highlight" id="pause"
+						onclick="playpause('pause', true)"
+						style="color:black;display:none;"
+						href="javascript:void(0);">
+						<img id='pause-' style="color:black;display:block;" src='public/images/play-24x24.png'>
+						<figcaption>play</figcaption>
+					</a>
+					<a class="text-decoration-none bd-highlight" id="loading"
+						style="color:black;display:none;"
+						onclick="playpause('play', false)"
+						href="javascript:void(0);">
+						<img id='loading-' style="color:black;display:none;" src='public/images/loading-24x24.png'>
+						<figcaption>stalled</figcaption>
+					</a>
+				</div>
+				<div class="d-flex flex-column bd-highlight mb-2 p-2 d-none" id="prev">
+					<a class="text-decoration-none bd-highlight"
+						style="color:black;display:block;"
+						onclick="song.next()"
+						href="javascript:void(0);">
+						<img src='public/images/next-24x24.png'>
+						<figcaption>next</figcaption>
+					</a>
+				</div>
+				<div class="d-flex flex-column bd-highlight mb-2 p-2">
+					<a class="text-decoration-none bd-highlight"
+						style="color:black;display:block;"
+						onclick="songcurrentplaying()"
+						href="javascript:void(0);">
+						<img src='public/images/reload-24x24.png'>
+						<figcaption>reload</figcaption>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex flex-column bd-highlight mb-1">
+			<audio id="track">
+				<source preload="false"
+					id="audio_src"
+					src="<?php echo $proto . '://' . $_SERVER['HOSTNAME'] . ':' . $port . '/stream'; ?>"
+					type="audio/ogg"
+				/>
+			</audio>
+		</div>
+		<nav class="d-none" id="menu" aria-label="pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link active" id="playlist-menu" onclick="menulst('playlist-menu', 'library-menu')" href="javascript:void(0)">Playlist</a>
+				</li>
+				<li class="page-item">
+					 <a class="page-link" id="library-menu" onclick="menulst('library-menu', 'playlist-menu')" href="javascript:void(0)">Library</a>
+				</li>
+				<li class="page-item">
+					 <a class="page-link d-none" id="search-menu" onclick="menulst('search-menu', null)" href="javascript:void(0)">Search</a>
+				</li>
+			</ul>
+		</nav>
+		<div id='home_playlist' class='d-none'>
+			<div class="d-flex flex-column" id="home">
+				<button	type='button'
+					class="btn btn-primary"
+					id="end"
+					ondblclick="chanson.change_to('all', null, null)">Home<button/>
+			</div>
+			<div class="d-flex flex-column">
+				<div class="container" id="playlist">
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+		<!--script src="./public/ressources/bootstrap.bundle.min.js"-->
+		</script>
+		<script type="text/javascript" src="./public/ressources/object.js">
+		</script>
+		<script type="text/javascript" src="./public/ressources/main.js">
+		</script>
+	</body>
 </html>
-
