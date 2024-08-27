@@ -13,8 +13,8 @@ require_once("private/library/hostname.php");
 		<link rel="manifest" href="./manifest.json">
 		<link rel="stylesheet" href="./public/ressources/style.css" />
 		<link rel="shortcut icon" href="./public/images/mush.ico" sizes="32x32"/>
-		<meta http-equiv="Cache-Control" content="max-age=120, no-store" />
-		<meta http-equiv="Age" content="90" />
+		<meta http-equiv="Cache-Control" content="max-age=90, no-store" />
+		<meta http-equiv="Age" content="120" />
 		<meta http-equiv="Expires" content="Thu, 1 January 1970 00:00:00 GMT" />
 		<title>Zoeurk JukeBox</title>
 	</head>
