@@ -1,4 +1,3 @@
-#FROM 'public/php' directory
 cd /www/private/src/
 test -s ../temp/ident.txt || \
 	sed -n '/"mpd":/ { :ident; /\("\(host\|password\)"\).*\("\(host\|password\)":\)/ { :redo; s/"\(host\|password\)": *"\([^"]*\)"/\n\1=\2\n/; t redo; s/\(.*\)\(host=[^\n]*\)\n/\2\n\1/;s/^\(host=[^\n]*\n\).*\n\(password=[^\n]*\).*$/\1\2/p }; N; b ident; }' ../config/config.json \
