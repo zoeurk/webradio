@@ -1,0 +1,10 @@
+{
+	"web":{
+		"user": "username",
+		"password": "password"
+	},
+	"mpd":{
+		"host": "mpd-hostname",
+		"password": "mpd-password"
+	}
+}

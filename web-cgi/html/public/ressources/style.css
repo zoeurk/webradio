@@ -1,0 +1,39 @@
+ .triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #555;
+ }
+ .autheur_info{
+  display:block;
+  text-decoration:none;
+  color:black;
+ }
+ .navbar-brand:before{
+  content: '\00266B';
+ }
+ .navbar-brand,
+ .navbar-brand:hover,
+ .navbar-brand:active{
+  color:black;
+ }
+ body{
+  background-color:lightblue;
+ }
+ ul li{
+  list-style-type: none;
+ }
+ #title{
+  color:green;
+ }
+ .brown{
+  color:brown;
+ }
+ #titre_actuel{
+  margin-left:15%;
+ }
+#end{
+  text-decoration:none;
+  color:black;
+}

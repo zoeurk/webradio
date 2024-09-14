@@ -1,0 +1,23 @@
+#FROM 'public/php' directory
+cd ../../private/src/
+test -s ../temp/ident.txt || \
+	sed -n '/"mpd":/ { :ident; /\("\(host\|password\)"\).*\("\(host\|password\)":\)/ { :redo; s/"\(host\|password\)": "\([^"]*\)"/\n\1=\2\n/; t redo; s/\(.*\)\(host=[^\n]*\)\n/\2\n\1/;s/^\(host=[^\n]*\n\).*\n\(password=[^\n]*\).*$/\1\2/p }; N; b ident; }' ../config/config.json \
+		> ../temp/ident.txt
+PASSWD="$(sed -n '2 s/^password=//p' ../temp/ident.txt)"
+HOSTNAME="$(sed -n '1 s/^host=//p' ../temp/ident.txt)"
+HOST=${PASSWD}@${HOSTNAME}
+mpc -f "%artist% %date% %album% track %track% %title% file:%file%" playlist | \
+	sed ':redo;s/track \([0-9]\{3\}\)/track \1/; t; s/track \([0-9]*\)/track 0\1/; t redo;' | \
+	sort | \
+	sed 's/^.*file://g' > ../temp/files.txt;
+mpc status -f "%artist% %date% %album% %track% %title%" | \
+	sed -n -e '1 p' -e '2 s/^.*\([0-9]\+:[0-9]\+\)\/.*$/\1/p' > ../temp/song.txt;
+mpc --host=$HOST --wait crop;
+cat ../temp/files.txt | \
+	mpc --host=$HOST --wait add;
+NBR=`mpc -f '%artist% %date% %album% %track% %title% pos=%position%' playlist | sed '1 d' | grep "$(sed '1 p' ../temp/song.txt)" | sed 's/^.*pos=//'`;
+mpc --host=$HOST play $NBR
+mpc --host=$HOST seek `sed -n '2 p' ../temp/song.txt`
+mpc --host=$HOST del 1
+mpc --host=$HOST random off
+#rm ../temp/{song,files,ident}.txt

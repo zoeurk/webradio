@@ -1,0 +1,15 @@
+### In this directory:
+DON'T FORGOT TO RESTRICT ACCESS TO THE DIRECTORY 'private' (it contains password, scripts...).
+You should modify manifest.json and index.php (eg: title, author, ...).
+
+You can use, share (/redistriber), modify that thing without any limits.
+Cette chose est libre d'usage, modification, distribution(/redistribution) sans aucunes limites
+
+You probably must to use the source file for create the main library.
+	mkdir /DOCUMENT/ROOT/private/{temp,json}
+	cd /DOCUMENT/ROOT/private
+	. ./src/library.src
+You should have to see in private/library/chanson.php
+for modify '$default_cmd'
+
+ABSOLUTE NO WARENTY
