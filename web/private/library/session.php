@@ -16,6 +16,7 @@
 		}
 		function courrante($id, $ticket){
 			$sess = session_id($id);
+			session_start();
 			if(!isset($_SESSION["id"])){
 				if($sess == true && $sess != ""){
 					session_destroy();
@@ -48,6 +49,9 @@
 								if(isset($_SESSION['new']))
 									unset($_SESSION['new']);
 						}
+					}else{
+						session_destroy();
+						$_SESSION = array();
 					}
 				}
 			}

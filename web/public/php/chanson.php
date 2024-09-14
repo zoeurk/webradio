@@ -12,9 +12,11 @@
 			return -1;
 		$sess = new session();
 		$sess->courrante($req_id, $req_ticket);
+		if(empty($_SESSION['id']) || empty($_SESSION['ticket']))
+			return -1;
 		return 0;
 	}
-	function session($ticket){
+	/*function session($ticket){
 		$sess = new session();
 		$sess->debut(false);
 		if($ticket == true){
@@ -29,7 +31,7 @@
 				return 0;
 			}
 		}
-	}
+	}*/
 	$url = explode("?", $_SERVER['REQUEST_URI']);
 	switch($url[1]){
 		case "current":
@@ -45,7 +47,7 @@
 			echo json_encode($val);
 			break;
 		case "go_next":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, false);
 				$val = $chanson->nextsong("next");
 				$val[0]->info->id = $_SESSION['id'];
@@ -55,7 +57,7 @@
 			}
 			break;
 		case "go_prev":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, false);
 				$val = $chanson->current("prev");
 				$val[1]->info->next[0]->info->id = $_SESSION['id'];
@@ -65,7 +67,7 @@
 			}
 			break;
 		case "play_this":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, false);
 				$chanson->play_this($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
 				$val = $chanson->current("status");
@@ -76,7 +78,7 @@
 			}
 			break;
 		case "ticket":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$val = array('id' => 0, 'ticket' => 0);
 				$val['id'] = $_SESSION['id'];
 				$val['ticket'] = $_SESSION['ticket'];
@@ -84,7 +86,7 @@
 			}
 			break;
 		case "REMOVE":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, false);
 				$chanson->remove($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
 				$chanson->createplaylist();
@@ -98,7 +100,7 @@
 			}
 			break;
 		case "REPCART":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, ($_POST['shuffle'] == "on") ? true : false);
 				$chanson->curart();
 				$playlist = $chanson->getplaylist();
@@ -111,7 +113,7 @@
 			}
 			break;
 		case "REPLACE":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, ($_POST['shuffle'] == "on") ? true : false);
 				if($_POST['artist'] != 'all'){
 					$chanson->replace($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
@@ -130,7 +132,7 @@
 			}
 			break;
 		case "APPEND":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, ($_POST['shuffle'] == "on") ? true : false);
 				$chanson->remove($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
 				$chanson->append($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
@@ -145,7 +147,7 @@
 			}
 			break;
 		case "PLAY":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				$chanson = new chanson(true, ($_POST['shuffle'] == "on") ? true : false);
 				$chanson->addplay($_POST['artist'], $_POST['date'], $_POST['album'], $_POST['track'], $_POST['title']);
 				$chanson->createplaylist();
@@ -159,7 +161,7 @@
 			}
 			break;
 		case "options":
-			if(session(true) == 0 && isset($_SESSION['ticket'])){
+			if(loggeduser($_POST['id'], $_POST['ticket']) == 0){
 				if(isset($_POST['shuffle'])){
 					$chanson = new chanson(true, ($_POST['shuffle'] == "on") ? true : false);
 					$chanson->random($_POST['shuffle']);

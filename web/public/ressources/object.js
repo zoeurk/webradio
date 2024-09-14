@@ -36,13 +36,13 @@ var ticket = {
 	TICKET_TIMEOUT: false,
 	interval: false,
 	cur_tkt: function(){
-		this.id = document.getElementById('id').getAttribute('value');
-		this.ticket = document.getElementById('ticket').getAttribute('value');
+		this.id = document.getElementById('id').value;
+		this.ticket = document.getElementById('ticket').value;
 	},
 	new_tkt: function(ticket){
 		let el = document.getElementsByClassName('ticket');
 		for(let i = 0;  i < el.length; i++){
-			el[i].setAttribute('value', ticket);
+			el[i].value = ticket;
 		}
 	},
 	delete_tkt: function(){
@@ -75,7 +75,7 @@ var ticket = {
 		var tkt = this;
 		request.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				console.log(this.responseText);
+				//console.log(this.responseText);
 				var login = JSON.parse(this.responseText);
 				if(tkt.interval != false){
 					clearInterval(tkt.interval);
@@ -139,7 +139,7 @@ var song = {
 		req.reqDuration.classList.toggle("text-warning");
 		request.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				console.log(this.responseText);
+				//console.log(this.responseText);
 				if(set == false){
 					set = true;
 				}else{
@@ -437,8 +437,9 @@ var song = {
 					clearTimeout(current.interval);
 					current.interval = false;
 				}
-				if(ticket.TIMEOUT != false)
+				if(ticket.TIMEOUT != false){
 					clearTimeout(ticket.TIMEOUT);
+				}
 				ticket.TIMEOUT = setTimeout(() => { ticket.timeout_tkt(); }, ticket.tkt_time);
 				if(current.TIMEOUT != false)
 					clearTimeout(current.TIMEOUT);
