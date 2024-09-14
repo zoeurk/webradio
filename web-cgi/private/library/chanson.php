@@ -40,7 +40,7 @@
 		}
 		public function createplaylist(){
 			$tps = array();
-			shell_exec($this->default_cmd . ' -f "\"artist\": \"%artist%\", \"album\": \"%date% - %album%\", \"track\": \"%track%\" - \"%title%\"" playlist | sed \':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo\' | sort | sed -nf ../../private/sed/mpc2json.sed > ../../private/jsons/playlist.json; test -s /www/private/jsons/playlist.json || rm /www/private/jsons/playlist.json');
+			shell_exec($this->default_cmd . ' -f "\"artist\": \"%artist%\", \"album\": \"%date% - %album%\", \"track\": \"%track%\" - \"%title%\"" playlist | sed \':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo\' | sort | sed -nf /www/private/sed/mpc2json.sed > /www/private/jsons/playlist.json; test -s /www/private/jsons/playlist.json || rm /www/private/jsons/playlist.json');
 		}
 		/**** Private ****/
 		private function mylibrary(){

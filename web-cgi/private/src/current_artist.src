@@ -1,5 +1,5 @@
 #FROM 'public/php' directory
-cd ../../private/src/
+cd /www/private/src/
 test -s ../temp/ident.txt || \
 	sed -n '/"mpd":/ { :ident; /\("\(host\|password\)"\).*\("\(host\|password\)":\)/ { :redo; s/"\(host\|password\)": *"\([^"]*\)"/\n\1=\2\n/; t redo; s/\(.*\)\(host=[^\n]*\)\n/\2\n\1/;s/^\(host=[^\n]*\n\).*\n\(password=[^\n]*\).*$/\1\2/p }; N; b ident; }' ../config/config.json \
 		> ../temp/ident.txt
@@ -10,5 +10,5 @@ ARTIST=`mpc -f "%artist%" current`
 mpc -f "%artist% pos=%position%" playlist | \
 	sed -n "/^$ARTIST pos=[0-9]\+$/ ! { s/^.* pos=\([0-9]\+\)$/\1/p }" | \
 	mpc --host=$HOST del
-mpc -f "\"artist\": \"%artist%\", \"album\": \"%date% - %album%\", \"track\": \"%track%\" - \"%title%\"" playlist | sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | sed -nf ../sed/mpc2json.sed > ../jsons/playlist.json
+mpc -f "\"artist\": \"%artist%\", \"album\": \"%date% - %album%\", \"track\": \"%track%\" - \"%title%\"" playlist | sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | sed -nf ../sed/mpc2json.sed > /www/private/jsons/playlist.json
 #rm ../temp/ident.txt
