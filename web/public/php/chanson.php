@@ -22,8 +22,8 @@
 				if((!isset($_POST['id']) || !isset($_POST['ticket'])) || loggeduser($_POST['id'], $_POST['ticket']) < 0){
 					session_destroy();
 					$_SESSION = array();
-					session_id();
-					session_start();
+					//session_id();
+					//session_start();
 					return -1;
 				}
 				return 0;
