@@ -2,7 +2,7 @@
 	<?php
 			$content = file_get_contents('/var/opt/tor/service/hostname');
 			$onion = str_replace(PHP_EOL, '', $content);
-			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+			header('Cache-Control: no-store, post-check=0, pre-check=0');
 			header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
 			header("Location:http://" . $onion, true, 301);
 			exit;
