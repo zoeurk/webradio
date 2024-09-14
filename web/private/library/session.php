@@ -15,7 +15,7 @@
 			}
 		}
 		function courrante($id, $ticket){
-			$sess = session_id();
+			$sess = session_id($id);
 			if(!isset($_SESSION["id"])){
 				if($sess == true && $sess != ""){
 					session_destroy();
