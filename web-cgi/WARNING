@@ -12,4 +12,6 @@ You probably must to use the source file for create the main library.
 You should have to see in private/library/chanson.php
 for modify '$default_cmd'
 
+Do in chrooted environement
+
 ABSOLUTE NO WARENTY
