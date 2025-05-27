@@ -135,7 +135,8 @@ config(){
 }
 usage(){
   printf "\
-Usage:\n\t\
+Usage: $0 ARGUMENTS\n\
+Arguments:\n\t\
 -C\t\tCreate the main library\n\t\
 -R on|off\tSwitch random \"on/off\"\n\t\
 -A\t\tReplace playlist by the current artist\n\t\
