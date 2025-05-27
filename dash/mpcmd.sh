@@ -170,7 +170,7 @@ subopts(){
   TRACK="track \"$2\""
   ;;
  *)
-  printf "Invalid command line.\nTry $0 -?\n"
+  printf "Invalid command line.\nTry $0 -h|-?\n"
   exit 255
   ;;
  esac;
@@ -321,7 +321,7 @@ in
     _TRACK="track \"$TRACK\""
     ;;
    *)
-    printf "Invalid command line.\nTry $0 -?\n"
+    printf "Invalid command line.\nTry $0 -h|-?\n"
     exit 255
     ;;
    esac;
@@ -449,7 +449,7 @@ in
   exit
  ;;
  *)
-  printf "Invalid command line.\nTry $0 -?\n"
+  printf "Invalid command line.\nTry $0 -h|-?\n"
   exit 255
  esac;
 done
