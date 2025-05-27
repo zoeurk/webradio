@@ -453,5 +453,5 @@ in
   exit 255
  esac;
 done
-printf "Anormal Termination.\n"
+printf "Anormal Termination.\nTry $0 -h|-?\n"
 exit 255
