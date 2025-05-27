@@ -371,7 +371,7 @@ in
    rm -r ${TEMP}
    exit
   fi
-  sed 's/\(artist\|album\|track\|title\) //g' ${TEMP}/mpc.scan | less
+  sed 's/\(artist\|album\|track\|title\) //g' ${TEMP}/mpc.scan
   printf "Which one (0 = none):"
   read READ
   test $READ -ge 0 -o $READ -le 0 || rm -r ${TEMP}
