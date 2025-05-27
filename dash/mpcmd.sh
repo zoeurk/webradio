@@ -141,7 +141,7 @@ Usage:\n\t\
 -a ARG\t\tAppend to playlist\n\t\
 -r ARG\t\tReplace playlist by selected\n\t\
 -D\t\tDelete the current playlist\n\t\
--d ARG\t\tDelect selected\n\t\
+-d ARG\t\tDelele selected\n\t\
 -s ARG\t\tSimple search for playing\n\t\
 -S ARG\t\tSimple Search\n\t\
 -l\t\tSearch from artist\n\t\
