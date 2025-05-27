@@ -363,7 +363,7 @@ in
   done
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
-  printf "mpc -f \"artist \\\"%%artist%%\\\" album \\\"%%album%%\\\" track \\\"%%track%%\\\" title \\\"%%title%%\\\"\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
+  printf "mpc -f \"artist \\\"%%artist%%\\\" album \\\"%%album%%\\\" track \\\"%%track%%\\\" title \\\"%%title%%\\\"\" find $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | cat -n > ${TEMP}/mpc.scan
   if test ! -s ${TEMP}/mpc.scan
   then
