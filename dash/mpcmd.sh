@@ -143,10 +143,10 @@ Arguments:\n\t\
 -a ARG\t\tAppend to playlist\n\t\
 -r ARG\t\tReplace playlist by selected\n\t\
 -D\t\tDelete the current playlist\n\t\
--d ARG\t\tDelele selected\n\t\
+-d ARG\t\tDelete selected\n\t\
 -s ARG\t\tSimple search for playing\n\t\
 -S ARG\t\tSimple Search\n\t\
--l\t\tSearch from artist\n\t\
+-l\t\tlist artist in playlist\n\t\
 -L \"artist\"\tList from artist\n\t\
 -h,-?\t\tShow this message\n\
 \t= = = = = = = = = = = = = = = =\n\
@@ -439,7 +439,6 @@ in
   printf "mpc --host=${PASSWD}@${HOSTNAME} -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | sort | uniq
   rm -r ${TEMP}
-  #echo $TEMP
   exit
  ;;
  L)
