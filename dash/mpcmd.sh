@@ -2,7 +2,7 @@
 MPCDIR=$HOME/.mpcmd
 if test ! -d $MPCDIR
 then
- mkdir $MPCDIR
+ mkdir $MPCDIR || exit 255
  for dir in "config" "jsons" "sed" "src" "temp"
  do
   mkdir $MPCDIR/$dir
@@ -370,7 +370,7 @@ in
    rm -r ${TEMP}
    exit
   fi
-  sed 's/\(artist\|album\|track\|title\) //g' ${TEMP}/mpc.scan
+  sed 's/\(artist\|album\|track\|title\) //g' ${TEMP}/mpc.scan | less
   printf "Which one (0 = none):"
   read READ
   test $READ -ge 0 -o $READ -le 0 || rm -r ${TEMP}
@@ -442,7 +442,7 @@ in
   exit
  ;;
  L)
-  mpc -f 'artist "%artist%" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG"
+  mpc -f 'artist "%artist%" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG" | less
   exit
  ;;
  l)
