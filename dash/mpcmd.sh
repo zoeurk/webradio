@@ -110,8 +110,9 @@ h
         i ]}]}]
 }
 EOF
- printf "Configure files in $MPCDIR/config:\n"
- ls -1 $MPCDIR/config
+ printf "Edit files in $MPCDIR/config:\n"
+ find $MPCDIR/config -type f
+ printf "\t= = = = = = = =\nAfter run $0 -h\n"
  exit
 fi
 CONFIG="$MPCDIR/config"
