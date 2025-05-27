@@ -145,7 +145,7 @@ Usage:\n\t\
 -s ARG\t\tSimple search for playing\n\t\
 -S ARG\t\tSimple Search\n\t\
 -l\t\tSearch from artist\n\t\
--L \"artist\"\tList artist in playlist\n\t\
+-L \"artist\"\tList from artist\n\t\
 -h,-?\tShow this message\n\
 \t= = = = = = = = = = = = = = = =\n\
 For '-a, -r, -d, -s, -S':\nAt least one of -A, -a or -t is needed:\n\
