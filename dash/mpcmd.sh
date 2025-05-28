@@ -233,7 +233,7 @@ shuffle(){
  test "`mpc | sed -n 's/^.*random: \(on\|off\).*$/\1/p'`" = "on" && mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} shuffle
 }
 SED(){
- sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | \
+ sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | uniq | \
  sed -nf ${SED}/mpc2json.sed > ${JSONS}/$1
 }
 c_playlist(){
@@ -393,7 +393,7 @@ in
   TEMP=`$MkTEMP`
   config ${TEMP}
   printf "mpc -f \"\\\"artist\\\": \\\"%%artist%%\\\", \\\"album\\\": \\\"%%date%% - %%album%%\\\", \\\"track\\\": \\\"%%track%%\\\" - \\\"%%title%%\\\"\" --host=${PASSWD}@${HOSTNAME} search $_ARTIST $_ALBUM $_TRACK $_TITLE\n" > ${SRCDIR}/cmd.src
-  . ${SRCDIR}/cmd.src | sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | SED remove.json
+  . ${SRCDIR}/cmd.src | SED remove.json
   if diff -q ${JSONS}/playlist.json ${JSONS}/remove.json > /dev/null 2>&1
   then
    printf "Use: $0 -D\n"
