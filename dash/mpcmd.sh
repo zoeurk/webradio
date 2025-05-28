@@ -14,7 +14,7 @@ then
                 "password": "password"
         },
         "mpd":{
-                "host": "mpd-user",
+                "host": "mpd-host",
                 "password": "mpd-passwd"
         }
 }
