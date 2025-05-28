@@ -438,9 +438,10 @@ in
   . ${TEMP}/mpc.scan > ${TEMP}/mpc.cmd
   which_read ${TEMP}/mpc.cmd
   config ${TEMP}
-  sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.cmd
+  sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --quiet --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.cmd
   . ${TEMP}/mpc.cmd
   rm -r ${TEMP}
+  mpc -f "%artist% - %album% - %title%" current
   exit
  ;;
  S)
@@ -455,9 +456,10 @@ in
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
   config ${TEMP}
-  printf "mpc --host=${PASSWD}@${HOSTNAME} -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
+  printf "mpc --quiet --host=${PASSWD}@${HOSTNAME} -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | sort | uniq
   rm -r ${TEMP}
+  mpc -f "%artist% - %album% - %title%" current
   exit
  ;;
  L)
