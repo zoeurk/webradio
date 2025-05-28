@@ -10,12 +10,12 @@ then
  cat << EOF > $MPCDIR/config/config.json
 {
         "web":{
-                "user": "",
-                "password": ""
+                "user": "username",
+                "password": "password"
         },
         "mpd":{
-                "host": "",
-                "password": ""
+                "host": "mpd-user",
+                "password": "mpd-passwd"
         }
 }
 EOF
