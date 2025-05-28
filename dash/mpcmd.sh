@@ -7,16 +7,15 @@ then
  do
   mkdir $MPCDIR/$dir
  done
-#"web" not used in the script
  cat << EOF > $MPCDIR/config/config.json
 {
         "web":{
-                "user": "username",
-                "password": "password"
+                "user": "zoeurk",
+                "password": "Gipsylamaisondansunarbre"
         },
         "mpd":{
-                "host": "mpd-host",
-                "password": "mpd-passwd"
+                "host": "127.0.0.1",
+                "password": "Musc4ri413"
         }
 }
 EOF
@@ -161,21 +160,66 @@ subopts(){
  in
  A)
   ARTIST="artist \"$2\""
+  AR="artist \\\"%%artist%%\\\""
   ;;
  a)
   ALBUM="album \"$2\""
+  AL="date \\\"%%date%%\\\" album \\\"%%album%%\\\""
   ;;
  t)
   TITLE="title \"$2\""
+  TI="track \\\"%%track%%\\\" title \\\"%%title%%\\\""
   ;;
  t)
   TRACK="track \"$2\""
   ;;
  *)
-  printf "Invalid command line.\nTry $0 -h|-?\n"
+  printf "Invalid command line.\nTry: $0 -h|-?\n"
   exit 255
   ;;
  esac;
+}
+prep_cmd(){
+ if test ${#TI} -ne 0
+ then
+  if test ${#AL} -eq 0
+  then
+   AL="date \\\"%date%\\\" album \\\"%%album%%\\\""	
+  fi
+  if test ${#AR} -eq 0
+  then
+   AR="artist \\\"%%artist%%\\\""
+  fi
+ fi
+ if test ${#AL} -ne 0
+ then
+  if test ${#AR} -eq 0
+  then
+   AR="artist \\\"%%artist%%\\\""
+  fi
+ fi
+ if test ${#AR} -eq 0
+ then
+  AR="artist \\\"%%artist%%\\\""
+ fi
+}
+which_read(){
+  if test `sed -n '$ =' $1` -ne 1
+  then
+   cat -n $1 | sed 's/\(artist\|date\|album\|track\|title\) //g'
+   printf "Which one (0 = none):"
+   read READ
+   test $READ -ge 0 -o $READ -le 0 || rm -r ${TEMP}
+   test -d ${TEMP} || exit 255
+   if test $READ -le 0
+   then
+    rm -r ${TEMP}
+    printf "Ok,\n\tSee you later.\n"
+    exit
+   fi
+  else
+   READ=1
+  fi
 }
 error(){
  if test -z "$1" -a -z "$2" -a -z "$3"
@@ -241,10 +285,18 @@ in
    done
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
+  prep_cmd
+  CMD="${AR} ${AL} ${TI}"
+  error "$ARTIST" "$ALBUM" "$TITLE"
+  TEMP=`$MkTEMP`
+  config ${TEMP}
+  printf "mpc -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
+  . ${SRCDIR}/cmd.src | sort | uniq > ${TEMP}/cmd.src
+  which_read ${TEMP}/cmd.src
+  sed -n "$READ s/^/mpc --wait --host=${PASSWD}@${HOSTNAME} findadd /p" -i ${TEMP}/cmd.src
   config ${TEMP}
   mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} crop;
-  printf "mpc --wait --host=${PASSWD}@${HOSTNAME} findadd $ARTIST $ALBUM $TRACK $TITLE\n" > ${SRCDIR}/cmd.src
-  . ${SRCDIR}/cmd.src
+  . ${TEMP}/cmd.src
   shuffle
   mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} del 0;
   c_playlist
@@ -275,9 +327,18 @@ in
   done
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
+  prep_cmd
+  CMD="${AR} ${AL} ${TI}"
+  error "$ARTIST" "$ALBUM" "$TITLE"
+  TEMP=`$MkTEMP`
   config ${TEMP}
-  printf "mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} findadd $ARTIST $ALBUM $TRACK $TITLE\n" > ${SRCDIR}/cmd.src
-  . ${SRCDIR}/cmd.src
+  printf "mpc -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
+  . ${SRCDIR}/cmd.src | sort | uniq > ${TEMP}/cmd.src
+  which_read ${TEMP}/cmd.src
+  sed -n "$READ s/^/mpc --wait --host=${PASSWD}@${HOSTNAME} findadd /p" -i ${TEMP}/cmd.src
+  config ${TEMP}
+  #printf "mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} findadd $ARTIST $ALBUM $TRACK $TITLE\n" > ${SRCDIR}/cmd.src
+  . ${TEMP}/cmd.src
   shuffle
   c_playlist
   rm -r ${TEMP}
@@ -343,14 +404,13 @@ in
   	sed -n "s/^.*$ARTIST *$ALBUM *$TRACK *$TITLE.* pos=\([0-9]*\)$/\1/p" | mpc --host=${PASSWD}@${HOSTNAME} del
   rm -r ${TEMP}
   c_playlist
-  if test ! -f ${JSONS}/playlist.json -o ! -s ${JSONS}/playlist.json
-  then
-  	rm -v ${JSONS}/playlist.json
-  	mpc --host=${PASSWD}@${HOSTNAME} load all
- 	shuffle
-	mpc --quiet --host=${PASSWD}@${HOSTNAME} play
-	#mpc --host=${PASSWD}@${HOSTNAME} next
- fi
+#  if test ! -f ${JSONS}/playlist.json -o ! -s ${JSONS}/playlist.json
+#  then
+#  	rm -v ${JSONS}/playlist.json
+#  	mpc --host=${PASSWD}@${HOSTNAME} load all
+# 	shuffle
+#	mpc --quiet --host=${PASSWD}@${HOSTNAME} play
+# fi
   mpc -f "%artist% - %album% - %title%" current
   exit
  ;;
@@ -362,29 +422,24 @@ in
    subopts $value "$OPTARG"
   done
   error "$ARTIST" "$ALBUM" "$TITLE"
+  prep_cmd
+  CMD="${AR} ${AL} ${TI}"
   TEMP=`$MkTEMP`
-  printf "mpc -f \"artist \\\"%%artist%%\\\" album \\\"%%album%%\\\" track \\\"%%track%%\\\" title \\\"%%title%%\\\"\" find $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
-  . ${SRCDIR}/cmd.src | cat -n > ${TEMP}/mpc.scan
+  printf "mpc -f \"artist \\\"%%artist%%\\\" date \\\"%%date%%\\\" album \\\"%%album%%\\\" track \\\"%%track%%\\\" title \\\"%%title%%\\\"\" search $ARTIST $ALBUM $TITLE | sort | uniq\n" > ${TEMP}/cmd.src
+  . ${TEMP}/cmd.src > ${TEMP}/mpc.scan
   if test ! -s ${TEMP}/mpc.scan
   then
    printf "Search is empty.\n"
    rm -r ${TEMP}
    exit
   fi
-  sed 's/\(artist\|album\|track\|title\) //g' ${TEMP}/mpc.scan
-  printf "Which one (0 = none):"
-  read READ
-  test $READ -ge 0 -o $READ -le 0 || rm -r ${TEMP}
-  test -d ${TEMP} || exit 255
-  if test $READ -le 0
-  then
-   rm -r ${TEMP}
-   printf "Ok,\n\tSee you later.\n"
-   exit
-  fi
+  sed 's/^/mpc -f \"artist \\\"%artist%\\\" date \\\"%date%\\\" album \\\"%album%\\\" track \\\"%track%\\\" title \\\"%title%\\\"\" find /g' \
+  -i ${TEMP}/mpc.scan
+  . ${TEMP}/mpc.scan > ${TEMP}/mpc.cmd
+  which_read ${TEMP}/mpc.cmd
   config ${TEMP}
-  sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.scan
-  . ${TEMP}/mpc.scan
+  sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.cmd
+  . ${TEMP}/mpc.cmd
   rm -r ${TEMP}
   exit
  ;;
@@ -394,44 +449,8 @@ in
   while getopts a:A:t: value
   do
    subopts $value "$OPTARG"
-   case $value
-   in
-   A)
-    AR="artist \\\"%%artist%%\\\""
-    #break
-   ;;
-   a)
-    AL="album \\\"%%album%%\\\""
-    #break
-   ;;
-   t)
-    TI="track \\\"%%track%%\\\" title \\\"%%title%%\\\""
-    #break
-   ;;
-   esac
   done
-  if test ${#TI} -ne 0
-  then
-  	if test ${#AL} -eq 0
-	then
-		AL="album \\\"%%album%%\\\""	
-	fi
-  	if test ${#AR} -eq 0
-	then
-		AR="artist \\\"%%artist%%\\\""
-	fi
-  fi
-  if test ${#AL} -ne 0
-  then
-  	if test ${#AR} -eq 0
-	then
-		AR="artist \\\"%%artist%%\\\""
-	fi
-  fi
-  if test ${#AR} -eq 0
-  then
-	AR="artist \\\"%%artist%%\\\""
-  fi
+  prep_cmd
   CMD="${AR} ${AL} ${TI}"
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
@@ -442,7 +461,7 @@ in
   exit
  ;;
  L)
-  mpc -f 'artist "%artist%" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG" | less
+  mpc -f 'artist "%artist%" date "%date" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG" | less
   exit
  ;;
  l)
