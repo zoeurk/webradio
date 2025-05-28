@@ -461,7 +461,7 @@ in
   exit
  ;;
  L)
-  mpc -f 'artist "%artist%" date "%date" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG" | less
+  mpc -f 'artist "%artist%" date "%date%" album "%album%" track "%track%" title "%title%"' search artist "$OPTARG" | less
   exit
  ;;
  l)
