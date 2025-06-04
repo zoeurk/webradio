@@ -7,6 +7,7 @@ then
  do
   mkdir $MPCDIR/$dir
  done
+#"web" not used in script
  cat << EOF > $MPCDIR/config/config.json
 {
         "web":{
@@ -14,7 +15,7 @@ then
                 "password": "password"
         },
         "mpd":{
-                "host": "mpd-host",
+                "host": "mpd-hostname",
                 "password": "mpd-passwd"
         }
 }
@@ -292,6 +293,12 @@ in
   config ${TEMP}
   printf "mpc -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | sort | uniq > ${TEMP}/cmd.src
+  if test ! -s ${TEMP}/cmd.src
+  then
+   printf "Search is empty.\n"
+   rm -rf ${TEMP}
+   exit
+  fi
   which_read ${TEMP}/cmd.src
   sed -n "$READ s/^/mpc --wait --host=${PASSWD}@${HOSTNAME} findadd /p" -i ${TEMP}/cmd.src
   config ${TEMP}
@@ -334,6 +341,12 @@ in
   config ${TEMP}
   printf "mpc -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | sort | uniq > ${TEMP}/cmd.src
+  if test ! -s ${TEMP}/cmd.src
+  then
+   printf "Search is empty.\n"
+   rm -rf ${TEMP}
+   exit
+  fi
   which_read ${TEMP}/cmd.src
   sed -n "$READ s/^/mpc --wait --host=${PASSWD}@${HOSTNAME} findadd /p" -i ${TEMP}/cmd.src
   config ${TEMP}
@@ -350,9 +363,10 @@ in
   TEMP=`$MkTEMP`
   config ${TEMP}
   mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} crop;
-  mpc --wait --host=${PASSWD}@${HOSTNAME} -f "%artist% %date% %album% track %track% %title% file:%file%" listall  | \
-   sed ":redo;s/track \([0-9]\{1,2\}\) /track 0\1 /; t redo;" | \
-   sort | sed "s/^.*file://g" | mpc --host=${PASSWD}@${HOSTNAME} add;
+  #mpc --wait --host=${PASSWD}@${HOSTNAME} -f "%artist% %date% %album% track %track% %title% file:%file%" listall  | \
+  # sed ":redo;s/track \([0-9]\{1,2\}\) /track 0\1 /; t redo;" | \
+  # sort | sed "s/^.*file://g" | mpc --host=${PASSWD}@${HOSTNAME} add;
+  mpc --wait --host=${PASSWD}@${HOSTNAME} add /
   shuffle
   mpc --quiet --wait --host=${PASSWD}@${HOSTNAME} del 0;
   test -e ${JSONS}/playlist.json && rm ${JSONS}/playlist.json
@@ -456,10 +470,9 @@ in
   error "$ARTIST" "$ALBUM" "$TITLE"
   TEMP=`$MkTEMP`
   config ${TEMP}
-  printf "mpc --quiet --host=${PASSWD}@${HOSTNAME} -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
+  printf "mpc --host=${PASSWD}@${HOSTNAME} -f \"$CMD\" search $ARTIST $ALBUM $TITLE\n" > ${SRCDIR}/cmd.src
   . ${SRCDIR}/cmd.src | sort | uniq
   rm -r ${TEMP}
-  mpc -f "%artist% - %album% - %title%" current
   exit
  ;;
  L)
