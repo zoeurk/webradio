@@ -145,12 +145,13 @@ Arguments:\n\t\
 -D\t\tDelete the current playlist\n\t\
 -d ARG\t\tDelete selected\n\t\
 -s ARG\t\tSimple search for playing\n\t\
+-w ARG\t\tSame as -s but wait the end of the current before playing\n\t\
 -S ARG\t\tSimple Search\n\t\
 -l\t\tlist artist in playlist\n\t\
 -L \"artist\"\tList from artist\n\t\
 -h,-?\t\tShow this message\n\
 \t= = = = = = = = = = = = = = = =\n\
-For '-a, -r, -d, -s, -S':\nAt least one of -A, -a or -t is needed:\n\
+For '-a, -r, -d, -s, -S, -w':\nAt least one of -A, -a or -t is needed:\n\
   -A \"Artist\"\n\
   -a \"Album\"\n\
   -t \"Title\"\n\
