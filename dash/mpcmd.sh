@@ -15,8 +15,8 @@ then
                 "password": "password"
         },
         "mpd":{
-                "host": "mpd-hostname",
-                "password": "mpd-passwd"
+                "host": "mpd-host",
+                "password": "mpd-password"
         }
 }
 EOF
@@ -243,7 +243,7 @@ c_playlist(){
     #sed ':redo; s/\(\"track\": \)\"\([0-9]\{1,2\}\)\"/\1\"0\2\"/;t redo' | sort | \
     #sed -nf ${SED}/mpc2json.sed > ${JSONS}/playlist.json
 }
-while getopts CRlL::Aa:r:Dd:S:s:h? main
+while getopts CRlL::Aa:r:Dd:S:s:w:h? main
 do
 case $main
 in
@@ -453,6 +453,36 @@ in
   which_read ${TEMP}/mpc.cmd
   config ${TEMP}
   sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --quiet --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.cmd
+  . ${TEMP}/mpc.cmd
+  rm -r ${TEMP}
+  mpc -f "%artist% - %album% - %title%" current
+  exit
+ ;;
+ w)
+  #Simple search
+  shift
+  while getopts a:A:t: value
+  do
+   subopts $value "$OPTARG"
+  done
+  error "$ARTIST" "$ALBUM" "$TITLE"
+  prep_cmd
+  CMD="${AR} ${AL} ${TI}"
+  TEMP=`$MkTEMP`
+  printf "mpc -f \"artist \\\"%%artist%%\\\" date \\\"%%date%%\\\" album \\\"%%album%%\\\" track \\\"%%track%%\\\" title \\\"%%title%%\\\"\" search $ARTIST $ALBUM $TITLE | sort | uniq\n" > ${TEMP}/cmd.src
+  . ${TEMP}/cmd.src > ${TEMP}/mpc.scan
+  if test ! -s ${TEMP}/mpc.scan
+  then
+   printf "Search is empty.\n"
+   rm -r ${TEMP}
+   exit
+  fi
+  sed 's/^/mpc -f \"artist \\\"%artist%\\\" date \\\"%date%\\\" album \\\"%album%\\\" track \\\"%track%\\\" title \\\"%title%\\\"\" find /g' \
+  -i ${TEMP}/mpc.scan
+  . ${TEMP}/mpc.scan > ${TEMP}/mpc.cmd
+  which_read ${TEMP}/mpc.cmd
+  config ${TEMP}
+  sed -n "$READ s/^[ \t]*[0-9]*[ \t]*/mpc --wait current;mpc --quiet --host=$PASSWD@$HOSTNAME searchplay /p;" -i ${TEMP}/mpc.cmd
   . ${TEMP}/mpc.cmd
   rm -r ${TEMP}
   mpc -f "%artist% - %album% - %title%" current
