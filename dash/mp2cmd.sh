@@ -186,7 +186,7 @@ prep_cmd(){
  then
   if test ${#AL} -eq 0
   then
-   AL="date \\\"%date%\\\" album \\\"%%album%%\\\""	
+   AL="date \\\"%%date%%\\\" album \\\"%%album%%\\\""	
   fi
   if test ${#AR} -eq 0
   then
