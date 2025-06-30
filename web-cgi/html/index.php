@@ -2,6 +2,7 @@
 <!doctype html>
 <?php
 	set_include_path(get_include_path() . PATH_SEPARATOR . '/www/html/');
+	require_once("/www/private/library/tornetwork.php");
 	require_once("/www/private/library/hostname.php");
 	$proto = 'http';
 	$port = '8000';
@@ -20,7 +21,7 @@
 		<meta http-equiv="Expires" content="Thu, 1 January 1970 00:00:00 GMT">
 		<title>Zoeurk JukeBox</title>
 	</head>
-	<body>
+	<body>	<h6><a href=./streaming/ target="_blank">VLC and others</a></h6>
 		<form id="config" method='' action='' style="display:none;">
 			<input id='host' name='config_host' value="<?php echo $_SERVER['HOSTNAME']; ?>">
 			<input id='proto' name='config_proto'
