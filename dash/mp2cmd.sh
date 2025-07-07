@@ -316,6 +316,7 @@ in
   #Replace by current artist
   TEMP=`$MkTEMP`
   config ${TEMP}
+  ARTIST="`mpc -f %artist% current`"
   rm -r ${TEMP}
   . ${SRCDIR}/current_artist.src
   c_playlist
