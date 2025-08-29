@@ -404,11 +404,24 @@ function stal(){
 		}
 	isPlay = setInterval(() => {
 		/*TisPlay = setTimeout(()=> {*/
-				if(isplaying == true){
+			delete(port + "://" + host + ":" + port +"/stream");
+			track.preload = "none";
+			track.src = "http://" + host + ":8000/stream";
+			document.getElementById('play').style.display = 'none';
+			document.getElementById('play-').style.display = 'none';
+			document.getElementById('pause').style.display = 'none';
+			document.getElementById('pause-').style.display = 'none';
+			document.getElementById('loading').style.display = 'block';
+			document.getElementById('loading-').style.display = 'block';
+			song.init = 0;
+			song.currentplaying(false);
+			track.load();
+			track.play();
+				/*if(isplaying == true){
 					song.init = 0;
 					song.currentplaying(false);
 					track.play();
-			}
+				}*/
 		/*}, 2500);*/
 	}, 3500);
 }
