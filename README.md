@@ -13,4 +13,4 @@ Sometime services like bind doesn't start corectly
 In a first time I would like to start my webradio whitout rc.local...  
 sorry  
 But this doesn't use rc.local at every time :)  
-web-cgi more up to date then web
+web-cgi more up to date than web
