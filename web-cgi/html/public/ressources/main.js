@@ -5,6 +5,15 @@ var mySearch = new bootstrap.Modal(document.getElementById('modal_recherche'), {
 
 var isplaying = false;
 var infoset = true;
+var isPlay = 0;
+var Ended = 0;
+
+/*
+let appid = "ZoeurKJukeBox";
+let notif = browser.notifications.create(appid, {
+							type: "basic",
+							title: "ZoeurKJukeBox",
+*/
 function datasend(){
 	if(data != false){
 		clearTimeout(data);
@@ -228,6 +237,15 @@ function playpause(stat, lestatus){
 			if(chanson.interval != false){
 				clearInterval(current.interval);
 			}
+			if(Ended != 0){
+				clearInterval(Ended);
+				Ended = 0;
+			}
+			if(isPlay != 0){
+				/*clearTimeout(TisPlay);*/
+				clearInterval(isPlay);
+				isPlay = 0;
+			}
 			/*if(Interval.interval != false){
 				clearInterval(Interval.interval);
 			}*/
@@ -262,6 +280,15 @@ function playpause(stat, lestatus){
 			delete("http://" + host + ":8000/stream");
 			lestatus = false;
 			isplaying = false;
+			if(Ended != 0){
+				clearInterval(Ended);
+				Ended = 0;
+			}
+			if(isPlay != 0){
+				/*clearTimeout(TisPlay);*/
+				clearInterval(isPlay);
+				isPlay = 0;
+			}
 			if(song.interval != false){
 				clearInterval(song.interval);
 			}
@@ -332,50 +359,111 @@ function recherche(){
 		chanson.find_that(title);
 	}
 }
+track.addEventListener("waiting", (event) => {
+	isstalled();
+});
 track.addEventListener("ended", (event) => {
-	paused();
 	if(isplaying == true){
-		delete(port + "://" + host + ":" + port +"/stream");
-		track.preload = "none";
-		track.src = "http://" + host + ":8000/stream";
-		document.getElementById('play').style.display = 'none';
-		document.getElementById('play-').style.display = 'none';
-		document.getElementById('pause').style.display = 'none';
-		document.getElementById('pause-').style.display = 'none';
-		document.getElementById('loading').style.display = 'block';
-		document.getElementById('loading-').style.display = 'block';
-		song.init = 0;
-		song.currentplaying(false);
-		track.load();
-		track.play();
-		playing();
+		isstalled();
+		if(Ended != 0){
+			clearInterval(Ended);
+			Ended = 0;
+		}
+		if(isPlay != 0){
+			/*clearTimeout(TisPlay);*/
+			clearInterval(isPlay);
+			isPlay = 0;
+		}
+		Ended = setInterval(() => {
+			delete(port + "://" + host + ":" + port +"/stream");
+			track.preload = "none";
+			track.src = "http://" + host + ":8000/stream";
+			document.getElementById('play').style.display = 'none';
+			document.getElementById('play-').style.display = 'none';
+			document.getElementById('pause').style.display = 'none';
+			document.getElementById('pause-').style.display = 'none';
+			document.getElementById('loading').style.display = 'block';
+			document.getElementById('loading-').style.display = 'block';
+			song.init = 0;
+			song.currentplaying(false);
+			track.load();
+			track.play();
+		}, 3500);
 	}
 });
 function stal(){
 	isstalled();
-	if(isplaying == true){
-		song.init = 0;
-		song.currentplaying(false);
-		track.play();
-		playing();
-	}
+		if(Ended != 0){
+			clearInterval(Ended);
+			Ended = 0;
+		}
+		if(isPlay != 0){
+			/*clearTimeout(TisPlay);*/
+			clearInterval(isPlay);
+			isPlay = 0;
+		}
+	isPlay = setInterval(() => {
+		/*TisPlay = setTimeout(()=> {*/
+				if(isplaying == true){
+					song.init = 0;
+					song.currentplaying(false);
+					track.play();
+			}
+		/*}, 2500);*/
+	}, 3500);
 }
 track.addEventListener("pause", (event) => {
-	track.removeEventListener("stalled",stal());
-	track.pause();
-	track.removeAttribute('src');
-	track.preload = "none";
-	//track.currentTime = 0;
-	delete("http://" + host + ":8000/stream");
-	lestatus = false;
-	isplaying = false;
-	if(song.interval != false){
-		clearInterval(song.interval);
+	if(isplaying == false){
+		track.removeEventListener("stalled",stal());
+		track.pause();
+		track.removeAttribute('src');
+		track.preload = "none";
+		//track.currentTime = 0;
+		delete("http://" + host + ":8000/stream");
+		lestatus = false;
+		isplaying = false;
+		if(song.interval != false){
+			clearInterval(song.interval);
+		}
+		if(chanson.interval != false){
+			clearInterval(current.interval);
+		}
+		if(isPlay != 0){
+			/*clearTimeout(TisPlay);*/
+			clearInterval(isPlay);
+			isPlay = 0;
+		}
+		if(Ended != 0){
+			clearInterval(Ended);
+			Ended = 0;
+		}
+		paused();
+	}else{
+		if(isPlay != 0){
+			/*clearTimeout(TisPlay);*/
+			clearInterval(isPlay);
+			isPlay = 0;
+		}
+		if(Ended != 0){
+			clearInterval(Ended);
+			Ended = 0;
+		}
+		Ended = setInterval(() => {
+			delete(port + "://" + host + ":" + port +"/stream");
+			track.preload = "none";
+			track.src = "http://" + host + ":8000/stream";
+			document.getElementById('play').style.display = 'none';
+			document.getElementById('play-').style.display = 'none';
+			document.getElementById('pause').style.display = 'none';
+			document.getElementById('pause-').style.display = 'none';
+			document.getElementById('loading').style.display = 'block';
+			document.getElementById('loading-').style.display = 'block';
+			song.init = 0;
+			song.currentplaying(false);
+			track.load();
+			track.play();
+		}, 3500);
 	}
-	if(chanson.interval != false){
-		clearInterval(current.interval);
-	}
-	paused();
 });
 track.onplaying = function(){
 	playing();
@@ -383,6 +471,15 @@ track.onplaying = function(){
 track.addEventListener("play", (event) => {
 	track.addEventListener("stalled", stal());
 	playing();
+	if(isPlay != 0){
+		/*clearTimeout(TisPlay);*/
+		clearInterval(isPlay);
+		isPlay = 0;
+	}
+	if(Ended != 0){
+		clearInterval(Ended);
+		Ended = 0;
+	}
 });
 les_infos();
 song.currentplaying(false);
